@@ -5,37 +5,40 @@ clear all;
 load('parsed_data\komora_24h-6-4_radfet.mat');
 
 % Data from orbit
-load('parsed_data\selected\radfet1.mat');
-load('parsed_data\selected\radfet2.mat');
-load('parsed_data\selected\radfet3.mat');
-load('parsed_data\selected\radfet4.mat');
-load('parsed_data\selected\radfet5.mat');
-load('parsed_data\selected\radfet6.mat');
-load('parsed_data\selected\radfet7.mat');
-load('parsed_data\selected\radfet8.mat');
+load('parsed_data\wo_outliers\radfet1.mat');
+load('parsed_data\wo_outliers\radfet2.mat');
+load('parsed_data\wo_outliers\radfet3.mat');
+load('parsed_data\wo_outliers\radfet4.mat');
+load('parsed_data\wo_outliers\radfet5.mat');
+load('parsed_data\wo_outliers\radfet6.mat');
+load('parsed_data\wo_outliers\radfet7.mat');
+load('parsed_data\wo_outliers\radfet8.mat');
 load('parsed_data\selected\radfet9.mat');
-load('parsed_data\selected\radfet10.mat');
-load('parsed_data\selected\radfet11.mat');
+load('parsed_data\wo_outliers\radfet10.mat');
+load('parsed_data\wo_outliers\radfet11.mat');
 load('parsed_data\selected\radfet12.mat');
-load('parsed_data\selected\radfet13.mat');
+load('parsed_data\wo_outliers\radfet13.mat');
 load('parsed_data\selected\radfet14.mat');
-load('parsed_data\selected\radfet15.mat');
-load('parsed_data\selected\radfet16.mat');
-load('parsed_data\selected\radfet17.mat');
-load('parsed_data\selected\radfet18.mat');
-load('parsed_data\selected\radfet19.mat');
-load('parsed_data\selected\radfet20.mat');
-load('parsed_data\selected\radfet21.mat');
-load('parsed_data\selected\radfet22.mat');
-load('parsed_data\selected\radfet23.mat');
+load('parsed_data\wo_outliers\radfet15.mat');
+load('parsed_data\wo_outliers\radfet16.mat');
+load('parsed_data\wo_outliers\radfet17.mat');
+load('parsed_data\wo_outliers\radfet18.mat');
+load('parsed_data\wo_outliers\radfet19.mat');
+load('parsed_data\wo_outliers\radfet20.mat');
+load('parsed_data\wo_outliers\radfet21.mat');
+load('parsed_data\wo_outliers\radfet22.mat');
+load('parsed_data\wo_outliers\radfet23.mat');
 load('parsed_data\selected\radfet24.mat');
-load('parsed_data\selected\radfet25.mat');
-load('parsed_data\selected\radfet26.mat');
+load('parsed_data\wo_outliers\radfet25.mat');
+load('parsed_data\wo_outliers\radfet26.mat');
 load('parsed_data\selected\radfet27.mat');
-load('parsed_data\selected\radfet28.mat');
-load('parsed_data\selected\radfet29.mat');
-load('parsed_data\selected\radfet30.mat');
-load('parsed_data\selected\radfet31.mat');
+load('parsed_data\wo_outliers\radfet28.mat');
+load('parsed_data\wo_outliers\radfet29.mat');
+load('parsed_data\wo_outliers\radfet30.mat');
+load('parsed_data\wo_outliers\radfet31.mat');
+load('parsed_data\wo_outliers\radfet32.mat');
+load('parsed_data\wo_outliers\radfet33.mat');
+load('parsed_data\wo_outliers\radfet34.mat');
 
 all_data = {radfet1converted,...
             radfet2converted,...
@@ -67,7 +70,10 @@ all_data = {radfet1converted,...
             radfet28converted,...
             radfet29converted,...
             radfet30converted,...
-            radfet31converted};
+            radfet31converted,...
+            radfet32converted,...
+            radfet33converted,...
+            radfet34converted};
 
 readout_dates = {"2018-12-04 00:00:00",...
                  "2018-12-11 09:03:00",...
@@ -100,7 +106,10 @@ readout_dates = {"2018-12-04 00:00:00",...
                  "2019-12-21 13:34:32",...
                  "2020-01-04 20:12:10",...
                  "2020-01-18 11:27:14",...
-                 "2020-01-31 21:12:30"
+                 "2020-01-31 21:12:30",...
+                 "2020-02-15 12:11:36",...
+                 "2020-02-29 21:38:46",...
+                 "2020-03-13 23:25:59"
                  };
 
 
