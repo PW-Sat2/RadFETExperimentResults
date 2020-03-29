@@ -39,6 +39,8 @@ load('parsed_data\wo_outliers\radfet31.mat');
 load('parsed_data\wo_outliers\radfet32.mat');
 load('parsed_data\wo_outliers\radfet33.mat');
 load('parsed_data\wo_outliers\radfet34.mat');
+load('parsed_data\wo_outliers\radfet35.mat');
+
 
 all_data = {radfet1converted,...
             radfet2converted,...
@@ -73,7 +75,8 @@ all_data = {radfet1converted,...
             radfet31converted,...
             radfet32converted,...
             radfet33converted,...
-            radfet34converted};
+            radfet34converted,...            
+            radfet35converted};
 
 readout_dates = {"2018-12-04 00:00:00",...
                  "2018-12-11 09:03:00",...
@@ -109,7 +112,8 @@ readout_dates = {"2018-12-04 00:00:00",...
                  "2020-01-31 21:12:30",...
                  "2020-02-15 12:11:36",...
                  "2020-02-29 21:38:46",...
-                 "2020-03-13 23:25:59"
+                 "2020-03-13 23:25:59",...                 
+                 "2020-03-28 20:17:26"
                  };
 
 
@@ -146,7 +150,7 @@ for i = 1:numel(all_data)
   plot(data.Vdiode, data.Vth0);
 end
 
-legend(legend_items, 'Location', 'Best');
+%legend(legend_items, 'Location', 'Best');
 xlabel('Vdiode [mV]');
 ylabel('Vth [mV]');
 title('Vth0 vs. Vdiode');
@@ -166,7 +170,7 @@ for i = 1:numel(all_data)
   plot(data.Vdiode, data.Vth1);
 end
 
-legend(legend_items, 'Location', 'Best');
+%legend(legend_items, 'Location', 'Best');
 xlabel('Vdiode [mV]');
 ylabel('Vth [mV]');
 title('Vth1 vs. Vdiode');
@@ -186,7 +190,7 @@ for i = 1:numel(all_data)
   plot(data.Vdiode, data.Vth2 );
 end
 
-legend(legend_items, 'Location', 'Best');
+%legend(legend_items, 'Location', 'Best');
 xlabel('Vdiode [mV]');
 ylabel('Vth [mV]');
 title('Vth2 vs. Vdiode');

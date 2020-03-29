@@ -38,12 +38,13 @@ load('parsed_data\radfet_31_converted.mat');
 load('parsed_data\radfet_32_converted.mat');
 load('parsed_data\radfet_33_converted.mat');
 load('parsed_data\radfet_34_converted.mat');
+load('parsed_data\radfet_35_converted.mat');
 
 
 
 
 all_data = {
-            {radfet34converted, 'radfet34'}
+            {radfet35converted, 'radfet35'}
             };
         
         
