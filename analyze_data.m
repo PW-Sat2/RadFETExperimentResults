@@ -49,6 +49,7 @@ load('parsed_data\wo_outliers\radfet41.mat');
 load('parsed_data\wo_outliers\radfet42.mat');
 load('parsed_data\wo_outliers\radfet43.mat');
 load('parsed_data\wo_outliers\radfet44.mat');
+load('parsed_data\wo_outliers\radfet45.mat');
 
 all_data = {{komora24h64radfet, "2018-12-04 00:00:00"},...
             {radfet1converted, "2018-12-11 09:03:00"},...
@@ -94,7 +95,8 @@ all_data = {{komora24h64radfet, "2018-12-04 00:00:00"},...
             {radfet41converted, "2020-06-27 13:27:54"},...
             {radfet42converted, "2020-07-11 12:21:55"},...
             {radfet43converted, "2020-07-25 12:42:15"},...
-            {radfet44converted, "2020-08-08 11:21:07"}};
+            {radfet44converted, "2020-08-08 11:21:07"},...
+            {radfet45converted, "2020-08-22 11:23:40"}};
 
 
 polynomials = struct('vth0', [-3.29685E-4, 0.48969, 1872.79214],...
@@ -287,7 +289,7 @@ saveas(f, 'outputs/Vth2 vs. sample - temperature compensated.png');
 
 f = figure;
 errorbar(experiment_days, mean_dose_vth0, 3*std_dose_vth0, 'o');
-lf_vth0 = fit(experiment_days', mean_dose_vth0', 'poly1');
+lf_vth0 = fit(experiment_days', mean_dose_vth0', 'poly1', 'Lower', [-Inf 0], 'Upper', [Inf 0]);
 hold on;
 plot(lf_vth0, 'b--');
 xlabel('Days in orbit');
@@ -303,7 +305,7 @@ saveas(f, 'outputs/Vth0 dose vs. time in orbit.png');
 
 f = figure;
 errorbar(experiment_days, mean_dose_vth1, 3*std_dose_vth1, 'o');
-lf_vth1 = fit(experiment_days', mean_dose_vth1', 'poly1');
+lf_vth1 = fit(experiment_days', mean_dose_vth1', 'poly1', 'Lower', [-Inf 0], 'Upper', [Inf 0]);
 hold on;
 plot(lf_vth1, 'b--');
 xlabel('Days in orbit');
@@ -319,7 +321,7 @@ saveas(f, 'outputs/Vth1 dose vs. time in orbit.png');
 
 f = figure;
 errorbar(experiment_days, mean_dose_vth2, 3*std_dose_vth2, 'o');
-lf_vth2 = fit(experiment_days', mean_dose_vth2', 'poly1');
+lf_vth2 = fit(experiment_days', mean_dose_vth2', 'poly1', 'Lower', [-Inf 0], 'Upper', [Inf 0]);
 hold on;
 plot(lf_vth2, 'b--');
 xlabel('Days in orbit');
@@ -361,7 +363,7 @@ saveas(f, 'outputs/All doses vs. time in orbit.png');
 
 f = figure;
 errorbar(experiment_days, mean_vth0, 3*std_vth0, 'o');
-lf_vth0 = fit(experiment_days', mean_vth0', 'poly1');
+lf_vth0 = fit(experiment_days', mean_vth0', 'poly1', 'Lower', [-Inf 0], 'Upper', [Inf 0]);
 hold on;
 plot(lf_vth0, 'b--');
 xlabel('Days in orbit');
@@ -377,7 +379,7 @@ saveas(f, 'outputs/Vth0 vs. time in orbit.png');
 
 f = figure;
 errorbar(experiment_days, mean_vth1, 3*std_vth1, 'o');
-lf_vth1 = fit(experiment_days', mean_vth1', 'poly1');
+lf_vth1 = fit(experiment_days', mean_vth1', 'poly1', 'Lower', [-Inf 0], 'Upper', [Inf 0]);
 hold on;
 plot(lf_vth1, 'b--');
 xlabel('Days in orbit');
@@ -393,7 +395,7 @@ saveas(f, 'outputs/Vth1 vs. time in orbit.png');
 
 f = figure;
 errorbar(experiment_days, mean_vth2, 3*std_vth2, 'o');
-lf_vth2 = fit(experiment_days', mean_vth2', 'poly1');
+lf_vth2 = fit(experiment_days', mean_vth2', 'poly1', 'Lower', [-Inf 0], 'Upper', [Inf 0]);
 hold on;
 plot(lf_vth2, 'b--');
 xlabel('Days in orbit');

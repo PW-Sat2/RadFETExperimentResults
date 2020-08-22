@@ -1,7 +1,7 @@
 clear all
 close all
 
-PLOT_ERRORS = false;
+PLOT_ERRORS = true;
 
 % Data from orbit
 load('parsed_data\radfet_1_converted.mat');
@@ -46,6 +46,7 @@ load('parsed_data\radfet_39_converted.mat');
 load('parsed_data\radfet_40_converted.mat');
 load('parsed_data\radfet_41_converted.mat');
 load('parsed_data\radfet_42_converted.mat');
+load('parsed_data\radfet_45_converted.mat');
 
 
 all_data = {
@@ -85,7 +86,7 @@ all_data = {
 %     {radfet39converted, 'radfet39'},...
 %     {radfet40converted, 'radfet40'},...
 %     {radfet41converted, 'radfet41'},...
-    {radfet41converted, 'radfet42'}
+    {radfet45converted, 'radfet45'}
     };
         
         
