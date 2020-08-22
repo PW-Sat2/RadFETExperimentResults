@@ -15,3 +15,8 @@ Total Ionising Dose vs. time in orbit - plots for each of three radiation-sensit
 ![pmos2](outputs/Vth2%20dose%20vs.%20time%20in%20orbit.png)
 
 All up-to-date results are available in [outputs folder](outputs).
+
+
+## Additional materials
+
+* [Poster from European CubeSat Symposium 2019](additional_materials/Poster%20RadFET%20ECS%202019.pdf)
