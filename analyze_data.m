@@ -54,7 +54,8 @@ load('parsed_data\wo_outliers\radfet46.mat');
 load('parsed_data\wo_outliers\radfet47.mat');
 load('parsed_data\wo_outliers\radfet48.mat');
 load('parsed_data\wo_outliers\radfet49.mat');
-
+load('parsed_data\wo_outliers\radfet50.mat');
+load('parsed_data\wo_outliers\radfet51.mat');
 
 all_data = {{komora24h64radfet, "2018-12-04 00:00:00"},...
             {radfet1converted, "2018-12-11 09:03:00"},...
@@ -105,7 +106,9 @@ all_data = {{komora24h64radfet, "2018-12-04 00:00:00"},...
             {radfet46converted, "2020-09-05 11:18:06"},...
             {radfet47converted, "2020-09-19 23:17:51"},...
             {radfet48converted, "2020-10-04 22:31:23"},...
-            {radfet49converted, "2020-11-07 11:34:14"},...            
+            {radfet49converted, "2020-11-07 11:34:14"},...
+            {radfet50converted, "2020-11-14 23:01:56"},...
+            {radfet51converted, "2020-11-21 11:22:57"},...
             };
 
 
@@ -118,14 +121,32 @@ radfet_vdiode = @(x) x/2*2500.0/(2^24);
 radfet_vth = @(x) x*2500.0/(2^24);
 to_dose = @(x) x/5*1000;
 
+outfilename = websave('altitude.json', 'https://sail.pw-sat.pl/altitude.json');
+altitude_json = fileread(outfilename);
+altitude = jsondecode(altitude_json);
+
+altitude_timedelta = [];
+
+for i = 1:numel(altitude.data.meanAltitude_km_)
+    altitude.data.meanAltitude_km_(i).datetime = datetime(altitude.data.meanAltitude_km_(i).timestamp,'ConvertFrom','epochtime','TicksPerSecond',1,'Format','dd-MMM-yyyy HH:mm:ss');
+    altitude_timedelta(i) = days(altitude.data.meanAltitude_km_(i).datetime - parse_date_string(all_data{1}{2}));
+end
+
 experiment_time = duration();
 experiment_days = [];
-legend_items = {};
+altitute_exp_days = [];
+
+for i = 1:numel(all_data)
+    experiment_dates{i} = parse_date_string(all_data{i}{2});
+end
+
 for i = 2:numel(all_data)
   timedelta = parse_date_string(all_data{i}{2}) - parse_date_string(all_data{1}{2});
   experiment_time(i) = timedelta;
   experiment_days(i) = days(timedelta);
   legend_items{i} = strcat(num2str(days(timedelta)), " days");
+  [v, dayindex] = min(abs(altitude_timedelta-experiment_days(i)));
+  altitute_exp_days(i) = altitude.data.meanAltitude_km_(dayindex).value;
 end
 
 % all data but the first - on ground
@@ -440,4 +461,30 @@ saveas(f, 'outputs/All Vth changes vs. time in orbit.png');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Vth change vs. days in orbit
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+f = figure;
+errorbar(altitute_exp_days, mean_vth0, 3*std_vth0, '.');
+hold on;
+plot(lf_vth0, 'b--');
+
+errorbar(altitute_exp_days, mean_vth1, 3*std_vth1, '.');
+plot(lf_vth1, 'r--');
+
+errorbar(altitute_exp_days, mean_vth2, 3*std_vth2, 'm.');
+plot(lf_vth2, 'm--');
+
+xlabel('Days in orbit');
+ylabel('Vth change [mV]');
+legend("Vth0 Measurement", "Vth0 poly3 fit", "Vth2 Measurement", "Vth1 poly3 fit", "Vth1 Measurement", "Vth2 poly3 fit", 'Location', 'Best');
+grid on;
+saveas(f, 'outputs/All Vth changes vs. time in orbit.png');
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

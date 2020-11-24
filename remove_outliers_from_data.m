@@ -51,6 +51,8 @@ load('parsed_data\radfet_46_converted.mat');
 load('parsed_data\radfet_47_converted.mat');
 load('parsed_data\radfet_48_converted.mat');
 load('parsed_data\radfet_49_converted.mat');
+load('parsed_data\radfet_50_converted.mat');
+load('parsed_data\radfet_51_converted.mat');
 
 
 all_data = {
@@ -91,22 +93,24 @@ all_data = {
 %     {radfet40converted, 'radfet40'},...
 %     {radfet41converted, 'radfet41'},...
 %     {radfet45converted, 'radfet45'},...
-%    {radfet46converted, 'radfet46'},...
-%    {radfet47converted, 'radfet47'},...
-    {radfet48converted, 'radfet49'}
+%     {radfet46converted, 'radfet46'},...
+%     {radfet47converted, 'radfet47'},...
+%     {radfet49converted, 'radfet49'},...
+    {radfet50converted, 'radfet50'},...
+%     {radfet51converted, 'radfet51'}
     };
         
         
 for i = 1:numel(all_data)
   radfet = all_data{i}{1};
 
-    for j=1:10
+    for j=1:20
         p = polyfit(radfet.Vth0, radfet.Vdiode, 2);
         y1 = polyval(p, radfet.Vth0);
         error = radfet.Vdiode - y1;
         abs_error = abs(error);
 
-        if max(abs_error./radfet.Vdiode) < 3e-3
+        if max(abs_error./radfet.Vdiode) < 1e-3
             break
         end
 
