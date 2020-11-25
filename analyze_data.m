@@ -125,12 +125,13 @@ outfilename = websave('altitude.json', 'https://sail.pw-sat.pl/altitude.json');
 altitude_json = fileread(outfilename);
 altitude = jsondecode(altitude_json);
 
-altitude_timedelta = [];
 
 for i = 1:numel(altitude.data.meanAltitude_km_)
     altitude.data.meanAltitude_km_(i).datetime = datetime(altitude.data.meanAltitude_km_(i).timestamp,'ConvertFrom','epochtime','TicksPerSecond',1,'Format','dd-MMM-yyyy HH:mm:ss');
-    altitude_timedelta(i) = days(altitude.data.meanAltitude_km_(i).datetime - parse_date_string(all_data{1}{2}));
 end
+
+altitude_altitude = [altitude.data.meanAltitude_km_.value];
+altitude_timedelta = days([altitude.data.meanAltitude_km_.datetime] - parse_date_string(all_data{1}{2}));
 
 experiment_time = duration();
 experiment_days = [];
@@ -331,6 +332,31 @@ saveas(f, 'outputs/Vth0 dose vs. time in orbit.png');
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Vth change vs. altitude
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+dvth_dt = @(t, p) 3*p.p1*t.^2 + 2*p.p2*t + p.p3;
+
+f = figure;
+plot(altitude_altitude, dvth_dt(altitude_timedelta, lf_vth0), '.-');
+hold on;
+
+
+vth0_diff = diff(mean_dose_vth0)./diff(experiment_days);
+% plot(altitute_exp_days(2:end), vth0_diff, '.-');
+
+grid on;
+
+xlabel('Altitude [km]');
+ylabel('Vth0 dose rate [mGy/day]');
+legend("Vth0 dose rate vs. altitude", 'Location', 'Best');
+grid on;
+saveas(f, 'outputs/dose rate Vth0 vs altitude.png');
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Vth change vs. days in orbit
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -462,29 +488,4 @@ saveas(f, 'outputs/All Vth changes vs. time in orbit.png');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Vth change vs. days in orbit
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-f = figure;
-errorbar(altitute_exp_days, mean_vth0, 3*std_vth0, '.');
-hold on;
-plot(lf_vth0, 'b--');
-
-errorbar(altitute_exp_days, mean_vth1, 3*std_vth1, '.');
-plot(lf_vth1, 'r--');
-
-errorbar(altitute_exp_days, mean_vth2, 3*std_vth2, 'm.');
-plot(lf_vth2, 'm--');
-
-xlabel('Days in orbit');
-ylabel('Vth change [mV]');
-legend("Vth0 Measurement", "Vth0 poly3 fit", "Vth2 Measurement", "Vth1 poly3 fit", "Vth1 Measurement", "Vth2 poly3 fit", 'Location', 'Best');
-grid on;
-saveas(f, 'outputs/All Vth changes vs. time in orbit.png');
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
