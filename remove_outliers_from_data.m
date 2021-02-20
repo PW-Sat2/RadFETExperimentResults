@@ -61,6 +61,8 @@ load('parsed_data\radfet_56_converted.mat');
 load('parsed_data\radfet_57_converted.mat');
 load('parsed_data\radfet_58_converted.mat');
 load('parsed_data\radfet_59_converted.mat');
+load('parsed_data\radfet_60_converted.mat');
+load('parsed_data\radfet_61_converted.mat');
 
 
 all_data = {
@@ -108,8 +110,8 @@ all_data = {
 %     {radfet51converted, 'radfet51'},...
 %     {radfet52converted, 'radfet52'},...
 %     {radfet53converted, 'radfet53'},...
-     {radfet58converted, 'radfet58'},...
-    {radfet59converted, 'radfet59'}
+%      {radfet60converted, 'radfet60'},...
+     {radfet61converted, 'radfet61'}
     };
         
         
